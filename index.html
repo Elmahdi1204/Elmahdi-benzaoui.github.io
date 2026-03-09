@@ -1,42 +1,402 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Mahdi Benzaoui Portfolio</title>
-<style>
-body{
-font-family: Arial;
-text-align:center;
-background:#f5f5f5;
-}
-.container{
-margin-top:100px;
-}
-a{
-display:block;
-margin:10px;
-color:#0066cc;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahdi Benzaoui | Expert Flutter Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #050505; color: #f4f4f5; font-family: 'Inter', sans-serif; }
+        .selection-blue::selection { background-color: rgba(59, 130, 246, 0.3); }
+        .blur-bg { backdrop-filter: blur(16px); }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+        
+        /* Phone Mockup Styling */
+        .phone-frame {
+            position: relative;
+            background: #18181b;
+            border-radius: 2.5rem;
+            border: 6px solid #27272a;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .phone-frame:hover { transform: scale(1.02); }
+        .phone-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+        .phone-frame:hover img { transform: scale(1.1); }
+        
+        .notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 33%;
+            height: 1.5rem;
+            background: #27272a;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            z-index: 10;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
+<body class="selection-blue">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050505]/80 blur-bg border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white text-xl">M</div>
+                <span class="text-xl font-bold tracking-tighter text-white hidden sm:block">Mahdi.dev</span>
+            </div>
+            <div class="hidden md:flex gap-10 text-sm font-medium text-zinc-400">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#projects" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-<body>
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-32 px-6 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="animate-fade-in">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 text-blue-400 text-xs font-bold rounded-full mb-8 border border-blue-500/20 uppercase tracking-widest">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    Expert Flutter Developer
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9]">
+                    Crafting <span class="text-blue-500">Mobile</span> Experiences.
+                </h1>
+                <p class="text-xl text-zinc-400 max-w-xl mb-12 leading-relaxed">
+                    I'm Mahdi Benzaoui, a Software Engineer specializing in building high-performance, beautiful cross-platform applications with Flutter.
+                </p>
+                <div class="flex flex-wrap gap-6">
+                    <a href="#projects" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition-all shadow-lg shadow-blue-600/20 flex items-center gap-3">
+                        View Portfolio
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 bg-white/5 text-white font-bold rounded-2xl hover:bg-white/10 transition-all border border-white/10">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
 
-<div class="container">
-<h1>Mahdi Benzaoui</h1>
-<p>Flutter Mobile Developer</p>
+            <div class="relative hidden lg:block animate-fade-in" style="animation-delay: 0.2s">
+                <!-- Phone Mockup Hero -->
+                <div class="relative mx-auto w-[300px] h-[600px] bg-zinc-900 rounded-[3rem] border-[8px] border-zinc-800 shadow-2xl overflow-hidden">
+                    <div class="notch"></div>
+                    <img src="https://picsum.photos/seed/mobile-dev/600/1200" alt="App Interface" class="w-full h-full object-cover opacity-80" referrerPolicy="no-referrer">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-6 right-6">
+                        <div class="w-12 h-12 bg-blue-600 rounded-xl mb-4"></div>
+                        <div class="h-4 w-3/4 bg-white/20 rounded-full mb-2"></div>
+                        <div class="h-4 w-1/2 bg-white/10 rounded-full"></div>
+                    </div>
+                </div>
+                <!-- Floating Elements -->
+                <div class="absolute -top-10 -right-10 p-6 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-3xl shadow-xl">
+                    <svg class="w-8 h-8 text-blue-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    <div class="text-sm font-bold text-white">High Performance</div>
+                </div>
+                <div class="absolute -bottom-10 -left-10 p-6 bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-3xl shadow-xl">
+                    <svg class="w-8 h-8 text-emerald-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                    <div class="text-sm font-bold text-white">Modern UI/UX</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h2>My Apps</h2>
+    <!-- Stats Section -->
+    <section class="py-20 border-y border-white/5 bg-white/[0.01]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">5+</div>
+                <div class="text-xs font-mono uppercase tracking-widest text-zinc-500">Years Experience</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">20+</div>
+                <div class="text-xs font-mono uppercase tracking-widest text-zinc-500">Apps Delivered</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">100%</div>
+                <div class="text-xs font-mono uppercase tracking-widest text-zinc-500">Client Satisfaction</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">A+</div>
+                <div class="text-xs font-mono uppercase tracking-widest text-zinc-500">Code Quality</div>
+            </div>
+        </div>
+    </section>
 
-<a href="https://play.google.com">Google Play Apps</a>
-<a href="https://apps.apple.com">App Store Apps</a>
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center reveal">
+                <p class="text-blue-500 font-mono text-sm uppercase tracking-[0.3em] mb-4">Featured Apps</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white">Mobile Portfolio</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Project Card 1 -->
+                <div class="group reveal">
+                    <div class="phone-frame aspect-[9/16] mb-8">
+                        <div class="notch"></div>
+                        <img src="https://picsum.photos/seed/sports-app/400/800" alt="Game Days" referrerPolicy="no-referrer">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <div class="flex gap-4 mb-4">
+                                <div class="p-3 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                                </div>
+                                <div class="p-3 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.36 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-blue-500 font-mono text-[10px] uppercase tracking-widest">Mobile App</span>
+                            <div class="flex gap-2">
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Flutter</span>
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Firebase</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">Game Days</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                            Mobile application helping users find sports partners and organize games. Features: user profiles, game postings, trainer search, real-time chat.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-white text-sm font-bold group">
+                            Case Study
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
 
-<h2>Portfolio</h2>
-<a href="https://behance.net">Behance Projects</a>
+                <!-- Project Card 2 -->
+                <div class="group reveal" style="transition-delay: 0.1s">
+                    <div class="phone-frame aspect-[9/16] mb-8">
+                        <div class="notch"></div>
+                        <img src="https://picsum.photos/seed/handyman/400/800" alt="Brikko" referrerPolicy="no-referrer">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <div class="flex gap-4 mb-4">
+                                <div class="p-3 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-blue-500 font-mono text-[10px] uppercase tracking-widest">Mobile & Web</span>
+                            <div class="flex gap-2">
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Flutter</span>
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Google Maps</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">Brikko</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                            Platform connecting clients with service providers. Features: task assignment, push notifications, location tracking, rating system.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-white text-sm font-bold group">
+                            Case Study
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
 
-<h2>Contact</h2>
-<p>Email: mahdi.benzaoui@live.fr</p>
+                <!-- Project Card 3 -->
+                <div class="group reveal" style="transition-delay: 0.2s">
+                    <div class="phone-frame aspect-[9/16] mb-8">
+                        <div class="notch"></div>
+                        <img src="https://picsum.photos/seed/food-delivery/400/800" alt="Noofy" referrerPolicy="no-referrer">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <div class="flex gap-4 mb-4">
+                                <div class="p-3 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-2">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-blue-500 font-mono text-[10px] uppercase tracking-widest">App Ecosystem</span>
+                            <div class="flex gap-2">
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Flutter</span>
+                                <span class="text-[10px] text-zinc-500 bg-white/5 px-2 py-0.5 rounded">Firebase</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-500 transition-colors">Noofy</h3>
+                        <p class="text-zinc-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                            Full ecosystem including Client App, Rider App, Restaurant App, and Admin Panel. Features: restaurant listing, order management, delivery tracking.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-white text-sm font-bold group">
+                            Case Study
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- Expertise Section -->
+    <section id="skills" class="py-32 px-6 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center reveal">
+                <p class="text-blue-500 font-mono text-sm uppercase tracking-[0.3em] mb-4">Technical Stack</p>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-white">Mobile Expertise</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-8 bg-zinc-900/50 border border-white/5 rounded-3xl hover:border-blue-500/30 hover:bg-blue-500/5 transition-all text-center group reveal">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4 text-zinc-400 group-hover:text-blue-500 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div class="text-white font-bold">Flutter</div>
+                </div>
+                <div class="p-8 bg-zinc-900/50 border border-white/5 rounded-3xl hover:border-blue-500/30 hover:bg-blue-500/5 transition-all text-center group reveal" style="transition-delay: 0.05s">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4 text-zinc-400 group-hover:text-blue-500 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <div class="text-white font-bold">Dart</div>
+                </div>
+                <div class="p-8 bg-zinc-900/50 border border-white/5 rounded-3xl hover:border-blue-500/30 hover:bg-blue-500/5 transition-all text-center group reveal" style="transition-delay: 0.1s">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4 text-zinc-400 group-hover:text-blue-500 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                    </div>
+                    <div class="text-white font-bold">Firebase</div>
+                </div>
+                <div class="p-8 bg-zinc-900/50 border border-white/5 rounded-3xl hover:border-blue-500/30 hover:bg-blue-500/5 transition-all text-center group reveal" style="transition-delay: 0.15s">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-4 text-zinc-400 group-hover:text-blue-500 group-hover:scale-110 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </div>
+                    <div class="text-white font-bold">REST APIs</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 bg-blue-600">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter">
+                    Let's build <br> the next big <span class="opacity-50">app.</span>
+                </h2>
+                <p class="text-blue-100 text-xl mb-12 max-w-md">
+                    Have an idea? I'm currently accepting new projects and collaborations.
+                </p>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 text-white">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <span class="text-xl font-medium">saha.mahdi25@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-white">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <span class="text-xl font-medium">El-Eulma, Setif, Algeria</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-10 md:p-12 rounded-[2.5rem] shadow-2xl reveal">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-zinc-400">Name</label>
+                            <input type="text" class="w-full px-0 py-3 border-b-2 border-zinc-100 focus:border-blue-600 outline-none transition-colors text-zinc-900 font-medium">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-widest text-zinc-400">Email</label>
+                            <input type="email" class="w-full px-0 py-3 border-b-2 border-zinc-100 focus:border-blue-600 outline-none transition-colors text-zinc-900 font-medium">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-zinc-400">Project Details</label>
+                        <textarea rows="4" class="w-full px-0 py-3 border-b-2 border-zinc-100 focus:border-blue-600 outline-none transition-colors text-zinc-900 font-medium resize-none"></textarea>
+                    </div>
+                    <button type="button" class="w-full py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all shadow-xl">
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-[#050505] border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">M</div>
+                <span class="text-white font-bold tracking-tighter">Mahdi.dev</span>
+            </div>
+            <p class="text-zinc-500 text-sm">© 2024 Mahdi Benzaoui. Built with Flutter & HTML.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                <a href="#" class="text-zinc-400 hover:text-white transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
